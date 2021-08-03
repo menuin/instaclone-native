@@ -19,7 +19,7 @@ export default function App() {
       require("./assets/logo.png"),
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/840px-Instagram_logo.svg.png",
     ]
-    const ImagePromises = imagesToLoad(image =>
+    const ImagePromises = imagesToLoad.map(image =>
       Asset.loadAsync(image))
     return Promise.all([...fontPromises, ...ImagePromises]);
   }
