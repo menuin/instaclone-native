@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import AuthButton from "../components/auth/AuthButton";
@@ -23,11 +23,21 @@ export default function CreateAccount() {
         console.log(data);
     }
     useEffect(() => {
-        register("firstName");
-        register("lastName");
-        register("username");
-        register("email");
-        register("password");
+        register("firstName", {
+            required: true,
+        });
+        register("lastName", {
+            required: true,
+        });
+        register("username", {
+            required: true,
+        });
+        register("email", {
+            required: true,
+        });
+        register("password", {
+            required: true,
+        });
     }, [register])
     return (
         <AuthLayout>
@@ -74,8 +84,12 @@ export default function CreateAccount() {
                 placeholderTextColor={"rgba(255,255,255,0.8)"}
                 onChangeText={(text) => setValue("password", text)}
                 lastOne={true}
+                onSubmitEditing={handleSubmit(onValid)}
             />
-            <AuthButton text="Create Account" disabled={true} onPress={() => null} />
+            <AuthButton
+                text="Create Account"
+                onPress={handleSubmit(onValid)}
+                loading={true} />
         </AuthLayout>
     )
 }
