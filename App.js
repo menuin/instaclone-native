@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Appearance, StyleSheet, Text, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
@@ -8,12 +6,14 @@ import { Asset } from "expo-asset";
 import LoggedOutNav from './navigators/LoggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppearanceProvider } from 'react-native-appearance';
-import { ApolloProvider } from '@apollo/client';
-import client from './apollo';
+import { ApolloProvider, useReactiveVar } from '@apollo/client';
+import client, { isLoggedInVar } from './apollo';
+import LoggedInNav from './navigators/LoggedInNav';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
   const onFinish = () => setLoading(false);
+  const isLoggedIn = useReactiveVar(isLoggedInVar)
   const preload = () => {
     const fontsToLoad = [Ionicons.font]
     const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
@@ -34,12 +34,11 @@ export default function App() {
         onFinish={onFinish}
       />)
   }
-
   return (
     <ApolloProvider client={client}>
       <AppearanceProvider>
         <NavigationContainer>
-          <LoggedOutNav />
+          {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
         </NavigationContainer>
       </AppearanceProvider>
     </ApolloProvider>
