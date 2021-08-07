@@ -1,11 +1,12 @@
-import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Feed from "../../screens/Feed";
-import Me from "../../screens/Me";
-import Notifications from "../../screens/Notifications";
-import Photo from "../../screens/Photo";
-import Profile from "../../screens/Profile";
-import Search from "../../screens/Search";
+import Photo from "../screens/Photo";
+import Profile from "../screens/Profile";
+import Feed from "../screens/Feed";
+import Search from "../screens/Search";
+import Notifications from "../screens/Notifications";
+import Me from "../screens/Me";
+import { Image } from "react-native";
 
 const Stack = createStackNavigator();
 export default function StackNavFactory({ screenName }) {
@@ -13,6 +14,7 @@ export default function StackNavFactory({ screenName }) {
         <Stack.Navigator
             screenOptions={{
                 headerBackTitleVisible: false,
+                headerMode: "screen",
                 headerTintColor: "white",
                 headerStyle: {
                     shadowColor: "rgba(255,255,255,0.3)",
@@ -21,7 +23,13 @@ export default function StackNavFactory({ screenName }) {
 
             }}
         >
-            {screenName === "Feed" ? (<Stack.Screen name="Feed" component={Feed} />
+            {screenName === "Feed" ? (<Stack.Screen name="Feed" component={Feed} options={{
+                headerTitle: () => (<Image style={{
+                    maxHeight: 50,
+                }}
+                    resizeMode="contain"
+                    source={require("../assets/titlelogo.png")} />)
+            }} />
             ) : null}
             {screenName === "Search" ? (<Stack.Screen name="Search" component={Search} />
             ) : null}
