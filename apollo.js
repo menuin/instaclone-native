@@ -14,7 +14,7 @@ export const logUserIn = async (token) => {
 }
 const client = new ApolloClient({
     // uri: "http://localhost:4000/graphql",
-    uri: "https://selfish-bulldog-91.loca.lt/graphql",
+    uri: "https://weak-snail-37.loca.lt/graphql",
     cache: new InMemoryCache(),
 })
 
