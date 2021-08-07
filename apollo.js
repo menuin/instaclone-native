@@ -13,8 +13,8 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    // uri: "https://empty-bat-37.loca.lt/graphql",
-    uri: "http://localhost:4000/graphql",
+    uri: "https://empty-bat-37.loca.lt/graphql",
+    // uri: "http://localhost:4000/graphql",
 
 });
 const authLink = setContext((_, { headers }) => {
