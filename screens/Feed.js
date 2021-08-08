@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, FlatList, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { logUserOut } from "../apollo";
 import Photo from "../components/Photo";
@@ -28,21 +28,29 @@ const FEED_QUERY = gql`
 
 export default function Feed({ navigation }) {
 
-    const { data, loading } = useQuery(FEED_QUERY);
-    const renderPhoto = ({ item: photo }) => {
-        return (
-            <Photo {...photo} />
-        )
-    }
+  const { data, loading, refetch } = useQuery(FEED_QUERY);
+  const renderPhoto = ({ item: photo }) => {
     return (
-        <ScreenLayout loading={loading}>
-            <FlatList
-                style={{ width: "100%" }}
-                showsVerticalScrollIndicator={false}
-                data={data?.seeFeed}
-                keyExtractor={photo => "" + photo.id}
-                renderItem={renderPhoto}
-            />
-        </ScreenLayout>
+      <Photo {...photo} />
     )
+  }
+  const refresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }
+  const [refreshing, setRefreshing] = useState(false);
+  return (
+    <ScreenLayout loading={loading}>
+      <FlatList
+        refreshing={refreshing}
+        onRefresh={refresh}
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}
+        data={data?.seeFeed}
+        keyExtractor={photo => "" + photo.id}
+        renderItem={renderPhoto}
+      />
+    </ScreenLayout>
+  )
 }
