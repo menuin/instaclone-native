@@ -94,10 +94,17 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
         },
         update: updateToggleLike,
     })
+
+    const goToProfile = () => {
+        navigation.navigate("Profile", {
+            username: user.username,
+            id: user.id,
+        })
+    }
     return (
 
         <Container>
-            <Header onPress={() => navigation.navigate("Profile")}>
+            <Header onPress={goToProfile}>
 
                 <UserAvatar
                     resizeMode="cover"
@@ -107,7 +114,7 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
             </Header>
 
             <File
-                resizeMode="cover"
+                resizeMode="contain"
                 style={{
                     width,
                     height: imageHeight,
@@ -131,7 +138,7 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
                     <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
                 </TouchableOpacity>
                 <Caption>
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                    <TouchableOpacity onPress={goToProfile}>
                         <Username>{user.username}</Username>
                     </TouchableOpacity>
                     <CaptionText>{caption}</CaptionText>
