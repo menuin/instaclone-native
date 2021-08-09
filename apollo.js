@@ -14,7 +14,7 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    uri: "https://average-chipmunk-57.loca.lt/graphql",
+    uri: "https://average-goose-7.loca.lt/graphql",
     // uri: "http://localhost:4000/graphql",
 
 });
@@ -32,17 +32,19 @@ export const logUserOut = async () => {
     isLoggedInVar(false);
     tokenVar(null);
 }
-const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache({
-        typePolicies: {
-            Query: {
-                fields: {
-                    seeFeed: offsetLimitPagination()
-                }
+export const cache = new InMemoryCache({
+    typePolicies: {
+        Query: {
+            fields: {
+                seeFeed: offsetLimitPagination()
             }
         }
-    }),
+    }
+});
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache,
 })
 
 export default client;

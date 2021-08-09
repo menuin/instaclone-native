@@ -4,10 +4,18 @@ import styled from "styled-components/native";
 import { Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { Ionicons } from "@expo/vector-icons";
+import { gql, useMutation } from "@apollo/client";
 
-const Container = styled.View`
-    
-`;
+const TOGGLE_LIKE_MUTATION = gql`
+    mutation toggleLike($id:Int!){
+        toggleLike(id:$id){
+            ok
+            error
+        }
+    }
+`
+
+const Container = styled.View``;
 const Header = styled.TouchableOpacity`
     padding : 10px; 
     flex-direction: row;
@@ -54,7 +62,38 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
         Image.getSize(file, (width, height) => {
             setImageHeight(height)
         })
-    }, [file])
+    }, [file]);
+    const updateToggleLike = (cache, result) => {
+        const {
+            data: {
+                toggleLike: { ok },
+            },
+        } = result;
+
+        if (ok) {
+            const photoId = `Photo:${id}`;
+            cache.modify({
+                id: photoId,
+                fields: {
+                    isLiked(prev) {
+                        return !prev;
+                    },
+                    likes(prev) {
+                        if (isLiked) {
+                            return prev - 1;
+                        }
+                        return prev + 1;
+                    },
+                },
+            });
+        }
+    }
+    const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
+        variables: {
+            id,
+        },
+        update: updateToggleLike,
+    })
     return (
 
         <Container>
@@ -76,7 +115,7 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
                 source={{ uri: file }} />
             <ExtraContainer>
                 <Actions>
-                    <Action >
+                    <Action onPress={toggleLikeMutation}>
                         <Ionicons
                             name={isLiked ? "heart" : "heart-outline"}
                             color={isLiked ? "tomato" : "white"}
