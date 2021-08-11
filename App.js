@@ -18,8 +18,14 @@ export default function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar)
 
   const preloadAssets = () => {
-    const fontsToLoad = [Ionicons.font]
-    const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
+    const fontsToLoad = [
+      Ionicons.font
+    ]
+    console.log(Ionicons.font)
+    const fontPromises = fontsToLoad.map((font) => {
+      return Font.loadAsync(font)
+    });
+
     const imagesToLoad = [
       require("./assets/logo.png"),
     ]
