@@ -14,7 +14,7 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    uri: "https://red-bullfrog-60.loca.lt/graphql",
+    uri: "https://giant-turtle-46.loca.lt",
     // uri: "http://localhost:4000/graphql",
 
 });
