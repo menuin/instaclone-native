@@ -14,7 +14,7 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    uri: "https://giant-turtle-46.loca.lt",
+    uri: "http://ed82fc972b04.ngrok.io/graphql",
     // uri: "http://localhost:4000/graphql",
 
 });
