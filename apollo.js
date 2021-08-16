@@ -14,7 +14,7 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    // uri: "http://c086a5b3d7d3.ngrok.io/graphql",
+    // uri: "http://88268a6ebb63.ngrok.io/graphql",
     uri: "http://localhost:4000/graphql",
 
 });
