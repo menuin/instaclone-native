@@ -40,7 +40,9 @@ export default function Search({ navigation }) {
     console.log(data);
     const renderItem = ({ item: photo }) => {
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Photo", {
+                photoId: photo.id,
+            })}>
                 <Image source={{ uri: photo.file }} style={{ width: width / numColumns, height: 100 }} />
             </TouchableOpacity>)
     }
