@@ -4,7 +4,6 @@ import * as MediaLibrary from "expo-media-library";
 import { FlatList, Image, TouchableOpacity, useWindowDimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../colors";
-import { Header } from "react-native/Libraries/NewAppScreen";
 
 
 const Container = styled.View`
