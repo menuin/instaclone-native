@@ -24,7 +24,7 @@ export default function TabsNav() {
                 headerShown: false,
             }}
         >
-            <Tabs.Screen name="Feed" options={{
+            <Tabs.Screen name="FeedTab" options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     <TabIcon iconName={"home"} color={color} focused={focused} />
                 )
@@ -32,7 +32,7 @@ export default function TabsNav() {
                 {() => <SharedStackNav screenName="Feed" />}
             </Tabs.Screen>
 
-            <Tabs.Screen name="Search" options={{
+            <Tabs.Screen name="SearchTab" options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     <TabIcon iconName={"search"} color={color} focused={focused} />
                 )
@@ -58,14 +58,14 @@ export default function TabsNav() {
                     )
                 }} />
 
-            <Tabs.Screen name="Notifications" options={{
+            <Tabs.Screen name="NotificationsTab" options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     <TabIcon iconName={"heart"} color={color} focused={focused} />)
             }} >
                 {() => <SharedStackNav screenName="Notifications" />}
             </Tabs.Screen>
 
-            <Tabs.Screen name="Me" options={{
+            <Tabs.Screen name="MeTab" options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     data?.me?.avatar ? <Image
                         source={{ uri: data.me.avatar }}

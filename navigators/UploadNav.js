@@ -12,16 +12,17 @@ export default function UploadNav() {
     return (
         <Tab.Navigator
             tabBarPosition="bottom"
-            tabBarOptions={{
-                style: {
-                    backgroundColor: "black",
+            screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: "black"
                 },
-                activeTintColor: "white",
-                indicatorStyle: {
+                tabBarActiveTintColor: "white",
+                tabBarIndicatorStyle: {
                     backgroundColor: "white",
                 }
-            }}>
-            <Tab.Screen name="Select">
+            }}
+        >
+            <Tab.Screen name="SelectTab">
                 {() => (
                     <Stack.Navigator screenOptions={{
                         headerTintColor: "white",
