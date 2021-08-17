@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import React, { useEffect, useRef, useState } from "react";
-import { Image, StatusBar, TouchableOpacity } from "react-native";
+import { Alert, Image, StatusBar, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import Slider from '@react-native-community/slider';
 import * as MediaLibrary from 'expo-media-library';
@@ -37,6 +37,9 @@ const CloseBtn = styled.TouchableOpacity`
     position : absolute;
     top : 20px;
     left:20px;
+`;
+const PhotoActions = styled(Actions)`
+    flex-direction: row;
 `;
 const PhotoAction = styled.TouchableOpacity`
     background-color: white;
@@ -91,10 +94,26 @@ export default function TakePhoto({ navigation }) {
                 exif: true,
             });
             setTakenPhoto(uri);
-            // const assets = await MediaLibrary.createAssetAsync(uri);
         }
     }
     const onDismiss = () => setTakenPhoto("");
+    const goToUpload = async (save) => {
+        if (save) {
+            await MediaLibrary.saveToLibraryAsync(takenPhoto);
+        }
+        // go to upload screen
+    }
+    const onUpload = () => {
+        Alert.alert("Alert", "Do you want to save before uploading?", [
+            {
+                text: "Yes",
+                onPress: () => goToUpload(true),
+            }, {
+                text: "No, thanks",
+                style: "destructive",
+                onPress: () => goToUpload(false),
+            }]);
+    }
 
 
     return (
@@ -155,17 +174,14 @@ export default function TakePhoto({ navigation }) {
                     </ButtonsContainer>
                 </Actions>)
                 : (
-                    <Actions>
+                    <PhotoActions>
                         <PhotoAction onPress={onDismiss}>
                             <PhotoActionText>Dismiss</PhotoActionText>
                         </PhotoAction>
-                        <PhotoAction>
+                        <PhotoAction onPress={onUpload}>
                             <PhotoActionText>Upload</PhotoActionText>
                         </PhotoAction>
-                        <PhotoAction>
-                            <PhotoActionText>Save & Upload</PhotoActionText>
-                        </PhotoAction>
-                    </Actions>)}
+                    </PhotoActions>)}
         </Container>
     )
 }
