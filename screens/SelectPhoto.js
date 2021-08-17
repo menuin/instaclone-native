@@ -77,7 +77,7 @@ export default function SelectPhoto({ navigation }) {
         navigation.setOptions({
             headerRight: HeaderRight,
         })
-    }, [])
+    }, [chosenPhoto])
 
 
     const choosePhoto = (uri) => {
