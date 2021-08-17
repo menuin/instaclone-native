@@ -22,7 +22,7 @@ export default function UploadNav() {
                 }
             }}
         >
-            <Tab.Screen name="SelectTab">
+            <Tab.Screen name="SelectTab" title="Select">
                 {() => (
                     <Stack.Navigator
                         screenOptions={{

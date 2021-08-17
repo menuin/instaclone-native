@@ -65,7 +65,7 @@ export default function TabsNav() {
                 {() => <SharedStackNav screenName="Notifications" />}
             </Tabs.Screen>
 
-            <Tabs.Screen name="MeTab" options={{
+            <Tabs.Screen name="MeTab " options={{
                 tabBarIcon: ({ focused, color, size }) => (
                     data?.me?.avatar ? <Image
                         source={{ uri: data.me.avatar }}
