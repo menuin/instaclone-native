@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabsNav from "./TabsNav";
 import UploadNav from "./UploadNav";
+import { ScreenStackHeaderRightView } from "react-native-screens";
 
 
 
