@@ -6,7 +6,7 @@ import Feed from "../screens/Feed";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import Me from "../screens/Me";
-import { Image } from "react-native";
+import { Image, Text, View } from "react-native";
 import Likes from "../screens/Likes";
 import Comments from "../screens/Comments";
 
@@ -26,11 +26,20 @@ export default function StackNavFactory({ screenName }) {
             }}
         >
             {screenName === "Feed" ? (<Stack.Screen name="Feed" component={Feed} options={{
-                headerTitle: () => (<Image style={{
-                    maxHeight: 50,
-                }}
-                    resizeMode="contain"
-                    source={require("../assets/titlelogo.png")} />)
+                headerTitle: () => {
+                    return (
+                        <Text style={{ color: "white", fontWeight: "600" }}>Instagram</Text>
+                    )
+                }
+                // headerTitle: () => (
+
+                //     <Image
+                //         style={{ maxHeight: 50, }}
+                //         resizeMode="contain"
+                //         source={require("../assets/titlelogo.png")}
+                //     />
+
+                // ),
             }} />
             ) : null}
             {screenName === "Search" ? (<Stack.Screen name="Search" component={Search} />

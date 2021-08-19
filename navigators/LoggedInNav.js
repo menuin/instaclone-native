@@ -4,6 +4,7 @@ import TabsNav from "./TabsNav";
 import UploadNav from "./UploadNav";
 import { ScreenStackHeaderRightView } from "react-native-screens";
 import UploadForm from "../screens/UploadForm";
+import MessagesNav from "./MessageNav";
 
 
 
@@ -33,6 +34,11 @@ export default function LoggedInNav() {
                         backgroundColor: "black",
                     }
                 }}
+            />
+            <Stack.Screen
+                name="Messages"
+                component={MessagesNav}
+                options={{ headerMode: "none" }}
             />
         </Stack.Navigator>
     )
