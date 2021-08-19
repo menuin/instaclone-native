@@ -114,7 +114,7 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
             </Header>
 
             <File
-                resizeMode="contain"
+                resizeMode="cover"
                 style={{
                     width,
                     height: imageHeight,
