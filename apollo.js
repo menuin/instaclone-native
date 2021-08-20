@@ -16,7 +16,7 @@ export const logUserIn = async (token) => {
 };
 
 const httpLink = createHttpLink({
-    uri: "http://c26dbba746f4.ngrok.io/graphql",
+    // uri: "http://c26dbba746f4.ngrok.io/graphql",
     // uri: "http://localhost:4000/graphql",
 
 });
@@ -36,7 +36,7 @@ const onErrorLink = onError(({ graphQLErrors, networkError }) => {
 
 const uploadHttpLink = createUploadLink({
     // uri: "http://localhost:4000/graphql",
-    uri: "http://321ec68c5f9c.ngrok.io/graphql",
+    uri: " http://488388377fb8.ngrok.io/graphql",
 })
 
 export const logUserOut = async () => {
