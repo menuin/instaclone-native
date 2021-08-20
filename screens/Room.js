@@ -2,7 +2,9 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
+import ScreenLayout from "../components/ScreenLayout";
+import styled from "styled-components/native";
+import { FlatList, KeyboardAvoidingView, TextInput } from "react-native";
 
 const ROOM_QUERY = gql`
     query seeRoom($id:Int!){
@@ -20,9 +22,27 @@ const ROOM_QUERY = gql`
     }
 `;
 
+const MessageContainer = styled.View``;
+const Author = styled.View``;
+const Avatar = styled.Image``;
+const Username = styled.Text`
+    color:white;
+`;
+const Message = styled.Text`
+    color:white;
+`;
+const MessageInput = styled.TextInput`
+    margin-bottom:50px;
+    width:95%;
+    background-color: white;
+    padding : 10px 20px;
+    border-radius:1000px;
+`;
+
+
 
 export default function Room({ route, navigation }) {
-    const { data } = useQuery(ROOM_QUERY, {
+    const { data, loading } = useQuery(ROOM_QUERY, {
         variables: {
             id: route?.params?.id,
         }
@@ -33,9 +53,33 @@ export default function Room({ route, navigation }) {
         })
     }, []);
 
+    const renderItem = ({ item: message }) => (
+        <MessageContainer>
+            <Author>
+                <Avatar source={{ uri: message.user.avatar }} />
+                <Username>{message.user.username}</Username>
+            </Author>
+            <Message>{message.payload}</Message>
+        </MessageContainer>
+    );
+
+
     return (
-        <View>
-            <Text>Messages List</Text>
-        </View>
+        <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "black" }} behavior="height" keyboardVerticalOffset={160}>
+            <ScreenLayout loading={loading}>
+                <FlatList
+                    inverted
+                    style={{ width: "100%" }}
+                    data={data?.seeRoom?.messages}
+                    keyExtractor={message => "" + message.id}
+                    renderItem={renderItem}
+                />
+                <MessageInput
+                    placeholder="Write a message..."
+                    returnKeyLabel="Send Message"
+                    returnKeyType="send"
+                />
+            </ScreenLayout>
+        </KeyboardAvoidingView>
     )
 }
