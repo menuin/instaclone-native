@@ -36,7 +36,7 @@ const onErrorLink = onError(({ graphQLErrors, networkError }) => {
 
 const uploadHttpLink = createUploadLink({
     // uri: "http://localhost:4000/graphql",
-    uri: "http://5b5df4e967fa.ngrok.io/graphql",
+    uri: "http://1619-59-9-200-70.ngrok.io/graphql",
 })
 
 export const logUserOut = async () => {

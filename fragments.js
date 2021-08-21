@@ -50,6 +50,7 @@ export const FEED_PHOTO = gql`
 
 export const ROOM_FRAGMENT = gql`
   fragment RoomParts on Room {
+    id
     unreadTotal
     users {
         avatar
